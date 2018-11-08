@@ -21,7 +21,7 @@ public:
 		//Initial capacity of hash table 
 		capacity = 20;
 		size = 0;
-		table = new Hash*[capacity];
+		table = new Hash *[capacity];
 
 		//Initialise all elements of table as NULL 
 		for (int i = 0; i < capacity; i++)
@@ -40,8 +40,6 @@ public:
 	//Function to add key value pair 
 	void insertNode(K key, V value)
 	{
-		Hash *temp = new Hash{ key, value };
-
 		// Apply hash function to find index for given key 
 		int index = hashing(key);
 
@@ -56,7 +54,7 @@ public:
 		//if new node to be inserted increase the table current size 
 		if (table[index] == NULL || table[index]->key == -1)
 			size++;
-		table[index] = temp;
+		table[index] = new Hash{ key, value };;
 	}
 
 	//Function to delete a key value pair 
@@ -71,14 +69,12 @@ public:
 			//if node found 
 			if (table[index]->key == key)
 			{
-				Hash *temp = table[index];
-
 				//Insert blank node here for further use 
 				table[index] = blank;
 
 				// Reduce size 
 				size--;
-				return temp->value;
+				return table[index]->value;
 			}
 			index++;
 			index %= capacity;
@@ -99,7 +95,8 @@ public:
 		while (table[index] != NULL)
 		{
 			int counter = 0;
-			if (counter++>capacity) //to avoid infinite loop 
+			//Break if reached bounds of array
+			if (counter++ > capacity)
 				return NULL;
 			//if node found return its value 
 			if (table[index]->key == key)
