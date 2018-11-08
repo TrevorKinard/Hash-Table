@@ -94,7 +94,6 @@ public:
 		//finding the node with given key 
 		while (table[index] != NULL)
 		{
-			int counter = 0;
 			//Break if reached bounds of array
 			if (counter++ > capacity)
 				return NULL;
@@ -124,7 +123,7 @@ public:
 	//Function to display the stored key value pairs 
 	void display()
 	{
-		for (int i = 0; i<capacity; i++)
+		for (int i = 0; i < capacity; i++)
 		{
 			if (table[i] != NULL && table[i]->key != -1)
 				std::cout << "key = " << table[i]->key
